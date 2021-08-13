@@ -7,7 +7,7 @@ exports.criarUmUsuario = (nome, email, senha) => {
     id: uuid(),
     nome,
     email,
-    senha
+    senha,
   };
 
   usuarios.push(usuario);
@@ -15,4 +15,9 @@ exports.criarUmUsuario = (nome, email, senha) => {
   fs.writeFileSync("./database/usuarios.json", JSON.stringify(usuarios));
 
   return usuario;
-}
+};
+
+exports.listarUsuarioPorEmail = ({ email }) => {
+  const usuarioEncontrado = usuarios.find((usuario) => usuario.email === email);
+  return usuarioEncontrado;
+};

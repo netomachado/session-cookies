@@ -1,10 +1,10 @@
-const express = require('express');
-const LoginController = require('../controllers/LoginController');
-const verificarUsuarioLogado = require('../middlewares/verificarUsuarioLogado');
+const express = require("express");
+const LoginController = require("../controllers/LoginController");
+const verificarUsuarioLogado = require("../middlewares/verificarUsuarioLogado");
 const router = express.Router();
 
 /* GET home page. */
-router.get('/', function(req, res, next) {
+router.get("/", function (req, res, next) {
   let usuario;
   let tema = req.cookies.tema ? req.cookies.tema : "light-mode";
 
@@ -12,32 +12,53 @@ router.get('/', function(req, res, next) {
     usuario = req.session.usuario;
   }
 
-  res.render('index', { title: 'Página Inicial', usuario, tema });
+  res.render("index", { title: "Página Inicial", usuario, tema });
 });
 
-router.get('/feed', verificarUsuarioLogado, function(req, res, next) {
-  res.render('feed', { usuario: req.session.usuario });
+router.get("/feed", verificarUsuarioLogado, function (req, res, next) {
+  res.render("feed", { usuario: req.session.usuario });
 });
 
-router.get('/cadastro', function(req, res, next) {
-  res.render('cadastro');
+router.get("/cadastro", function (req, res, next) {
+  res.render("cadastro");
 });
 
-router.post("/cadastro", function(req, res, next) {
+router.post("/cadastro", function (req, res, next) {
   const { nome, email, senha, tema } = req.body;
 
-  const { senha: senhaNaoUsada, ...usuario } = LoginController.criarUsuario(nome, email, senha);
+  const { senha: senhaNaoUsada, ...usuario } = LoginController.criarUsuario(
+    nome,
+    email,
+    senha
+  );
 
   req.session.usuario = usuario;
 
   res.cookie("tema", tema);
 
-  res.redirect('/feed');
+  res.redirect("/feed");
 });
 
-router.get("/logout", function(req, res) {
+router.get("/login", function (req, res, next) {
+  res.render("login", { title: "Login" });
+});
+
+router.post("/login", function (req, res, next) {
+  const { email, senha } = req.body;
+
+  const { senha: senhaNaoUsada, ...usuario } = LoginController.logarUsuario({
+    email,
+    senha,
+  });
+
+  req.session.usuario = usuario;
+
+  res.redirect("/feed");
+});
+
+router.get("/logout", function (req, res) {
   req.session.destroy();
   res.redirect("/");
-})
+});
 
 module.exports = router;
