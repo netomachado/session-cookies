@@ -2,7 +2,8 @@
 <html>
   <%- include('partials/head.ejs') %> 
   <body class="<%= tema %>">
-    <header>
+    <header class="d-flex justify-content-between">
+      <p>Welcome to <%= title %></p>
 
       <% if (typeof usuario !== "undefined") { %> 
         <p>Bem vinde, <%= usuario.nome %></p>
@@ -17,10 +18,6 @@
 
 
     </header>
-
-    <p>Welcome to <%= title %></p>
-
-    
     
   </body>
 </html>
