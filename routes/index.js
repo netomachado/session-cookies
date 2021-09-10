@@ -32,7 +32,9 @@ router.post("/cadastro", async function (req, res, next) {
     nome,
     email,
     senha
-  });
+  }).then(user => user.dataValues);
+
+  // const { senha: senhaNaoUsada, ...usuario } = usuarioCriado;
 
   req.session.usuario = usuario;
 

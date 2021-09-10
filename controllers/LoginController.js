@@ -6,7 +6,7 @@ exports.criarUsuario = ({ nome, email, senha }) => {
 
   const usuario = UsuarioModel.criarUmUsuario({ nome, email, senha: senhaCriptografada });
 
-  return usuario.dataValues;
+  return usuario;
 };
 
 exports.logarUsuario = async ({ email, senha }) => {
