@@ -2,24 +2,71 @@
 <html lang="en">
 <%- include('partials/head') %> 
 <body>
-  <form action="/cadastro" method="POST">
-    <label for="nome">Nome</label>
-    <input type="text" name="nome" id="nome" placeholder="Digite seu nome">
+  <div class="container">
 
-    <label for="email">Email</label>
-    <input type="email" name="email" id="email" placeholder="Digite seu email">
+    <form action="/cadastro" method="POST" class="row g-3 mt-5">
+      <div class="input-group mb-3">
+        <span class="input-group-text" id="basic-addon1">Nome</span>
+        <input 
+        type="text" 
+        class="form-control" 
+        placeholder="Digite seu nome" 
+        aria-label="Nome" 
+        aria-describedby="basic-addon1"
+        name="nome" 
+        id="nome"
+        >
+      </div>
+      <div class="input-group mb-3">
+        <span class="input-group-text" id="basic-addon1">Email</span>
+        <input 
+          type="email" 
+          class="form-control" 
+          placeholder="Digite seu email" 
+          aria-label="Email" 
+          aria-describedby="basic-addon1"
+          name="email" 
+          id="email"
+        >
+      </div>
+      <div class="input-group mb-3">
+        <span class="input-group-text" id="basic-addon1">Senha</span>
+        <input 
+          type="password" 
+          class="form-control" 
+          placeholder="Digite sua senha" 
+          aria-label="password" 
+          aria-describedby="basic-addon1"
+          name="senha" 
+          id="senha"
+        >
+      </div>
+      <!-- <label for="nome">Nome</label>
+        <input type="text"  placeholder="Digite seu nome"> -->
+        
+        <!-- <label for="email">Email</label>
+        <input type="email" name="email" id="email" placeholder="Digite seu email">
+        
+        <label for="senha">Senha</label>
+        <input type="password" name="senha" id="senha" placeholder="Digite sua senha">
+         -->
 
-    <label for="senha">Senha</label>
-    <input type="password" name="senha" id="senha" placeholder="Digite sua senha">
+         <label for="tema">Tema</label>
+         <select name="tema" id="tema" class="form-select" aria-label="Default select example">
+          <option selected disabled>Escolha um tema</option>
+          <option value="dark-mode">Tema Dark</option>
+          <option value="light-mode">Tema Light</option>
+        </select>
 
-    <label for="tema">Tema</label>
-    <select name="tema" id="tema">
-      <option disabled selected>Escolha um tema</option>
-      <option value="dark-mode">Tema Dark</option>
-      <option value="light-mode">Tema Light</option>
-    </select>
-
-    <button>Enviar</button>
-  </form>
-</body>
-</html>
+        
+        <!-- <select name="tema" id="tema">
+          <option disabled selected>Escolha um tema</option>
+          <option value="dark-mode">Tema Dark</option>
+          <option value="light-mode">Tema Light</option>
+        </select> -->
+        
+        <button class="w-25">Enviar</button>
+      </form>
+    </div>
+    </body>
+    </html>

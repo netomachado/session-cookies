@@ -1,5 +1,6 @@
 const express = require("express");
 const LoginController = require("../controllers/LoginController");
+const FeedController = require("../controllers/FeedController");
 const verificarUsuarioLogado = require("../middlewares/verificarUsuarioLogado");
 const router = express.Router();
 
@@ -16,6 +17,7 @@ router.get("/", function (req, res, next) {
 });
 
 router.get('/feed', verificarUsuarioLogado, function(req, res, next) {
+
   res.render('feed', { usuario: req.session.usuario, title: 'Cadastro' });
 });
 
@@ -23,14 +25,14 @@ router.get('/cadastro', function(req, res, next) {
   res.render('cadastro', { title: 'Cadastro'});
 });
 
-router.post("/cadastro", function (req, res, next) {
+router.post("/cadastro", async function (req, res, next) {
   const { nome, email, senha, tema } = req.body;
 
-  const { senha: senhaNaoUsada, ...usuario } = LoginController.criarUsuario(
+  const { senha: senhaNaoUsada, ...usuario } = await LoginController.criarUsuario({
     nome,
     email,
     senha
-  );
+  });
 
   req.session.usuario = usuario;
 
@@ -43,10 +45,10 @@ router.get("/login", function (req, res, next) {
   res.render("login", { title: "Login" });
 });
 
-router.post("/login", function (req, res, next) {
+router.post("/login", async function (req, res, next) {
   const { email, senha } = req.body;
 
-  const { senha: senhaNaoUsada, ...usuario } = LoginController.logarUsuario({
+  const { senha: senhaNaoUsada, ...usuario } = await LoginController.logarUsuario({
     email,
     senha,
   });
