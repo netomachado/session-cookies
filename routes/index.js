@@ -16,9 +16,10 @@ router.get("/", function (req, res, next) {
   res.render("index", { title: "Página Inicial", usuario, tema });
 });
 
-router.get('/feed', verificarUsuarioLogado, function(req, res, next) {
+router.get('/feed', verificarUsuarioLogado, async function(req, res, next) {
+  const { data: posts } = await FeedController.getAllPosts();
 
-  res.render('feed', { usuario: req.session.usuario, title: 'Cadastro' });
+  res.render('feed', { usuario: req.session.usuario, title: 'feed', posts: posts.slice(10, 30) });
 });
 
 router.get('/cadastro', function(req, res, next) {

@@ -10,19 +10,19 @@
   </header>
   <main class="container px-5">
     <div class="row g-3 gy-5">
-    <% for (let i = 0; i < 6; i++) { %>
+    <% posts.forEach(post => { %>
         <div class="col-12 col-md-6 col-lg-4 col-xl-3">
           <div class="card">
             <div class="card-body">
-              <h5 class="card-title">Cai da escada ontem</h5>
-              <p class="card-text">Meu pai me empurrou</p>
+              <h5 class="card-title"><%= post.title %></h5>
+              <p class="card-text"> <%= post.body %>  </p>
               <button type="button" class="btn btn-primary">Like</button>
               <button type="button" class="btn btn-danger">Dislike</button>
             </div>
           </div>
         </div>
 
-        <% } %>
+        <% }) %>
       </div>
   </main>
 </body>
