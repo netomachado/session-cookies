@@ -22,6 +22,13 @@ router.get('/feed', verificarUsuarioLogado, async function(req, res, next) {
   res.render('feed', { usuario: req.session.usuario, title: 'feed', posts: posts.slice(10, 30) });
 });
 
+router.get('/posts/:id/comentarios', verificarUsuarioLogado, async function(req, res, next) {
+  const { id } = req.params;
+  const { data: comentarios } = await FeedController.getAllComments(id);
+
+  res.render('comentarios', { usuario: req.session.usuario, title: 'Comentarios', comentarios });
+});
+
 router.get('/cadastro', function(req, res, next) {
   res.render('cadastro', { title: 'Cadastro'});
 });
